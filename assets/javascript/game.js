@@ -9,7 +9,7 @@ var guesses;
 var wins;
 
 
-// store list of vars for quick reference
+// commented list of vars for quick reference
 // var words = ["skydive", "snowboard", "skateboard", "longboard", "surf", "raft", "wakeboard", "luge", "bmx", "climbing"];
 // var word;
 // var wordArr;
@@ -68,7 +68,7 @@ document.onkeyup = function(event) {
         uArr[wordArr.indexOf(userGuess)] = userGuess;
         console.log("current uArr: " + uArr);
         // check if word is complete (user wins)
-        if (uArr.indexOf("_") == "undefined") {
+        if (uArr.indexOf("_") == -1) {
             // USER WINS - tell them to hit New Game button to start over
             // 
             // 
