@@ -58,9 +58,9 @@ function newGame() {
     
     // write to html to display wins, uArr, fresh noose, etc.
     document.querySelector("#wins").innerHTML = "Wins: " + wins;
-    document.querySelector("#uarr").innerHTML = "Word: " +uArr;
+    document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
     document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses;
-    document.querySelector("#remg").innerHTML = "# Guesses Remaining: " + remG;
+    document.querySelector("#remg").innerHTML = "Guesses Remaining: " + remG;
     // noose html - make once game works
 
 }
@@ -98,13 +98,13 @@ function guessCheck() {
     if (wordArr.indexOf(userGuess) > -1) {
         // replace corresponding underscores in uArr with userGuess
         uArr[wordArr.indexOf(userGuess)] = userGuess;
-        document.querySelector("#uarr").innerHTML = "Word: " +uArr;
+        document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
         console.log("progress: " + uArr);
         // check if win conditions are met
         winCheck();
     } else  {
         remG--;
-        document.querySelector("#remg").innerHTML = "# Guesses Remaining: " + remG;
+        document.querySelector("#remg").innerHTML = "Guesses Remaining: " + remG;
         // code to add body part to visuals goes here
         // 
         // 
