@@ -9,7 +9,7 @@ var guesses;
 var wins;
 
 
-// commented list of vars for quick reference
+// commented list of vars for quick reference in case any are removed from global list
 // var words = ["skydive", "snowboard", "skateboard", "longboard", "surf", "raft", "wakeboard", "luge", "bmx", "climbing"];
 // var word;
 // var wordArr;
@@ -21,7 +21,7 @@ var wins;
 
 // functions
 
-// attach to a New Game button to start a new game
+// newGame - attach to a New Game button to start a new game
 function newGame() {
     // reset number of remaining guesses
     var remG = 6;
@@ -30,7 +30,7 @@ function newGame() {
     var word = words[Math.floor(Math.random() * words.length)];
     console.log("word: " + word);
 
-    // split word into array of individual letters
+    // split word into array of individual letters, store in wordArr
     var wordArr = word.split("");
 
     // create uArr
@@ -53,6 +53,47 @@ function newGame() {
     // 
     // 
 
+}
+
+function winCheck() {
+    // replace corresponding underscores in uArr with userGuess
+    uArr[wordArr.indexOf(userGuess)] = userGuess;
+    
+    // check if there are any underscores left in uArr
+    // no underscores means the user has won the game
+    if (uArr.indexOf("_") == -1) {
+        alert("You Won!");
+    }
+
+    // if there are still underscores in uArr, the user has not yet won (nothing happens until they press another key)
+}
+
+function loseCheck() {
+
+}
+
+function guessCheck() {
+    if (wordArr.indexOf(guessCheck) > -1) {
+        winCheck();
+    } else  {
+        remG--;
+
+        // code to add body part to visuals goes here
+        // 
+        // 
+        // 
+
+        loseCheck();
+    }
+}
+
+function checkRepeat() {
+    if (guesses.indexOf(userGuess) > -1) {
+        alert("You already guessed " + userGuess + "!");
+    } else {
+        guesses.push(userGuess);
+        guessCheck();
+    }
 }
 
 
