@@ -1,12 +1,25 @@
 // initialize vars and arrays
 
-var words = ["skydive", "snowboard", "skateboard", "longboard", "surf", "raft", "wakeboard", "luge", "bmx", "climbing"];
+var words = ["skydive",
+             "snowboard", 
+             "skateboard",
+             "longboard", 
+             "surf", 
+             "raft", 
+             "wakeboard", 
+             "luge", 
+             "bmx", 
+             "climbing"
+            ];
 var word;
-var wordArr;
+var prevWord;
+var wordArr = [];
+var uArr = [];
 var wordLen;
-var remG;
-var guesses;
-var wins;
+var remG = 6;
+var userGuess;
+var guesses = [];
+var wins = 0;
 
 
 // commented list of vars for quick reference in case any are removed from global list
@@ -19,65 +32,79 @@ var wins;
 // var wins;
 
 
-// functions
+// FUNCTIONS
 
 // newGame - attach to a New Game button to start a new game
 function newGame() {
-    // reset number of remaining guesses
-    var remG = 6;
+
+    // reset values
+    guesses = [];
+    remG = 6;
 
     // choose random word from words array
-    var word = words[Math.floor(Math.random() * words.length)];
+    word = words[Math.floor(Math.random() * words.length)];
     console.log("word: " + word);
 
     // split word into array of individual letters, store in wordArr
-    var wordArr = word.split("");
+    wordArr = word.split("");
+    console.log(wordArr);
 
-    // create uArr
-    var uArr = [];
+    // reset and fill out uArr
+    uArr = [];
     for (var i=0; i<wordArr.length; i++) {
         uArr.push("_");
     }
     console.log("uArr: " + uArr);
-
-    // create array for previous guesses
-    var guesses = [];
-
-    // store important info from current/prev game
-    // 
-    // 
-    // 
     
-    // write to html to display uArr, fresh noose, etc.
-    // 
-    // 
-    // 
+    // write to html to display wins, uArr, fresh noose, etc.
+    document.querySelector("#wins").innerHTML = "Wins: " + wins;
+    document.querySelector("#uarr").innerHTML = "Word: " +uArr;
+    document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses;
+    document.querySelector("#remg").innerHTML = "# Guesses Remaining: " + remG;
+    // noose html - make once game works
 
 }
 
 function winCheck() {
-    // replace corresponding underscores in uArr with userGuess
-    uArr[wordArr.indexOf(userGuess)] = userGuess;
-    
+    console.log("made it to winCheck function");
     // check if there are any underscores left in uArr
     // no underscores means the user has won the game
     if (uArr.indexOf("_") == -1) {
-        alert("You Won!");
+        wins++;
+        document.querySelector("#wins").innerHTML = "Wins: " + wins;
+        alert("You Won! The word was: " + word);
+        alert("Press ok to start a new game");
+        newGame();
+        console.log("made it to win condition and reset - did it work?");
     }
-
     // if there are still underscores in uArr, the user has not yet won (nothing happens until they press another key)
 }
 
 function loseCheck() {
-
+    console.log("made it to loseCheck function");
+    if (remG == 0) {
+        alert("You lost :( \nThe word was: " + word);
+        newGame();
+        console.log("made it to lose condition and reset - did it work?");
+    }
+    // if remG is not yet equal to 0, the user has not yet lost (nothing happens until they press another key)
 }
 
 function guessCheck() {
-    if (wordArr.indexOf(guessCheck) > -1) {
+    console.log("made it to guessCheck function");
+    console.log("guessCheck wordArr: " + wordArr);
+    console.log("guessCheck userGuess: " + userGuess);
+    // if userGuess is correct
+    if (wordArr.indexOf(userGuess) > -1) {
+        // replace corresponding underscores in uArr with userGuess
+        uArr[wordArr.indexOf(userGuess)] = userGuess;
+        document.querySelector("#uarr").innerHTML = "Word: " +uArr;
+        console.log("progress: " + uArr);
+        // check if win conditions are met
         winCheck();
     } else  {
         remG--;
-
+        document.querySelector("#remg").innerHTML = "# Guesses Remaining: " + remG;
         // code to add body part to visuals goes here
         // 
         // 
@@ -88,47 +115,29 @@ function guessCheck() {
 }
 
 function checkRepeat() {
+    console.log("made it to checkRepeat function");
+    console.log("userGuess in checkRepeat(): " + userGuess);
+    console.log("guesses list in checkRepeat(): " + guesses);
     if (guesses.indexOf(userGuess) > -1) {
         alert("You already guessed " + userGuess + "!");
     } else {
         guesses.push(userGuess);
+        document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses;
+
         guessCheck();
     }
 }
 
 
+// MAIN PROCESS 
+
+newGame();
 document.onkeyup = function(event) {
-    var userGuess = event.key;
+    // store the key pressed in userGuess var
+    userGuess = event.key.toLowerCase();
+    console.log("userGuess: " + userGuess);
 
-    // add userGuess to guesses array
-    guesses.push(userGuess);
-
-    // check if userGuess is a correct guess
-    if (wordArr.indexOf(userGuess) > -1) {
-        // if correct, replace it with corresponding _ in uArr
-        uArr[wordArr.indexOf(userGuess)] = userGuess;
-        console.log("current uArr: " + uArr);
-        // check if word is complete (user wins)
-        if (uArr.indexOf("_") == -1) {
-            // USER WINS - tell them to hit New Game button to start over
-            // 
-            // 
-            // 
-        }
-    } else {
-        // if incorrect, subtract 1 from remG, add body part
-        remG--;
-        console.log("current remG: " + remG);
-        // code to add body part
-        // 
-        // 
-        // 
-        if (remG = 0) {
-            // USER LOSES - tell them to hit New Game button to start over
-            // 
-            // 
-            // 
-        }
+    // make sure the userGuess is not a repeat of a previous guess
+    checkRepeat();
     }
 
-}
