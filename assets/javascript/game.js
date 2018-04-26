@@ -35,8 +35,10 @@ var wins = 0;
 // FUNCTIONS
 // 
 // 
-// IMPORTANT: fix bug where final letter upon victory
-//  and 0 for Guesses Remaining upon loss do not render
+// IMPORTANT: fix rendering bug - guessing last letter correctly 
+// does not render it on word line, 0 for Guesses Remaining upon 
+// loss does not render, win/loss messages don't render
+//  
 // 
 // 
 // 
