@@ -19,6 +19,7 @@ var wordLen;
 var remG = 6;
 var userGuess;
 var guesses = [];
+var dispGuesses = [];
 var wins = 0;
 
 
@@ -51,22 +52,21 @@ function newGame() {
 
     // reset values
     guesses = [];
+    dispGuesses = [];
     remG = 6;
 
     // choose random word from words array
     word = words[Math.floor(Math.random() * words.length)];
-    console.log("word: " + word);
+    console.log(word);
 
     // split word into array of individual letters, store in wordArr
     wordArr = word.split("");
-    console.log(wordArr);
 
     // reset and fill out uArr
     uArr = [];
     for (var i=0; i<wordArr.length; i++) {
         uArr.push("_");
     }
-    console.log("uArr: " + uArr);
     
     // write to html to display wins, uArr, etc.
     document.querySelector("#wins").innerHTML = "Wins: " + wins;
@@ -79,7 +79,6 @@ function newGame() {
 }
 
 function winCheck() {
-    console.log("made it to winCheck function");
     // check if there are any underscores left in uArr
     // no underscores means the user has won the game
     if (uArr.indexOf("_") == -1) {
@@ -91,7 +90,6 @@ function winCheck() {
 }
 
 function loseCheck() {
-    console.log("made it to loseCheck function");
     if (remG == 0) {
         document.querySelector("#winLoseMessage").innerHTML = "YOU LOSE! :(\nThe word was: " + word;
     }
@@ -99,9 +97,6 @@ function loseCheck() {
 }
 
 function guessCheck() {
-    console.log("made it to guessCheck function");
-    console.log("guessCheck wordArr: " + wordArr);
-    console.log("guessCheck userGuess: " + userGuess);
     // if userGuess is correct
     if (wordArr.indexOf(userGuess) > -1) {
         // replace corresponding underscores in uArr with userGuess
@@ -111,7 +106,6 @@ function guessCheck() {
             }
         }
         document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
-        console.log("progress: " + uArr);
 
         winCheck();
     } else  {
@@ -123,14 +117,12 @@ function guessCheck() {
 }
 
 function checkRepeat() {
-    console.log("made it to checkRepeat function");
-    console.log("userGuess in checkRepeat(): " + userGuess);
-    console.log("guesses list in checkRepeat(): " + guesses);
     if (guesses.indexOf(userGuess) > -1) {
         alert("You already guessed " + userGuess + "!");
     } else {
-        guesses.push(userGuess.toUpperCase());
-        document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses.join(" ");
+        guesses.push(userGuess);
+        dispGuesses.push(userGuess.toUpperCase());
+        document.querySelector("#guesses").innerHTML = "Guessed Letters: " + dispGuesses.join(" ");
 
         guessCheck();
     }
@@ -141,9 +133,12 @@ function checkRepeat() {
 
 newGame();
 document.onkeyup = function(event) {
+    // prevent all functionality except for new game button once the game is won or lost
+    if (remG == 0 | uArr.indexOf("_") == -1) {
+        return;
+    }
     // store the key pressed in userGuess var
     userGuess = event.key.toLowerCase();
-    console.log("userGuess: " + userGuess);
 
     // make sure the userGuess is not a repeat of a previous guess
     checkRepeat();

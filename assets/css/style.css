@@ -4,10 +4,8 @@ body {
     background-position-x: right;
 }
 
-.word {
-    font-size: 12em;
-    margin-top: .7em;
-    text-align: center;
+.topMarg {
+    margin-top: 2em;
 }
 
 .container {
@@ -22,8 +20,5 @@ body {
     font-size: 1em;
 }
 
-.down {
-    margin-top: 145px;
-}
 
 /* MEDIA QUERIES */
