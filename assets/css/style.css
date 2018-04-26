@@ -1,6 +1,6 @@
 body {
     background-image: url(../images/extremebackground.png);
-    background-size: 150vw 100vh;
+    background-size: 150vw 120vh;
     background-position-x: right;
 }
 
@@ -20,6 +20,10 @@ body {
 
 .instructions {
     font-size: 1em;
+}
+
+.down {
+    margin-top: 145px;
 }
 
 /* MEDIA QUERIES */

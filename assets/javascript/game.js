@@ -85,12 +85,7 @@ function winCheck() {
     if (uArr.indexOf("_") == -1) {
         wins++;
         document.querySelector("#wins").innerHTML = "Wins: " + wins;
-        document.querySelector("#winLoseMessage").innerHTML = "YOU WIN!";
-        console.log("win message should have shown");
-        // alert("You Won! The word was: " + word);
-        alert("You Won! \nThe word was: " + word + "\n\nclick ok to start a new game");
-        newGame();
-        console.log("made it to win condition and reset - did it work?");
+        document.querySelector("#winLoseMessage").innerHTML = "You Won! :) \nThe word was: " + word + "\n\nclick ok to start a new game";
     }
     // if there are still underscores in uArr, the user has not yet won (nothing happens until they press another key)
 }
@@ -99,11 +94,6 @@ function loseCheck() {
     console.log("made it to loseCheck function");
     if (remG == 0) {
         document.querySelector("#winLoseMessage").innerHTML = "YOU LOSE! :(\nThe word was: " + word;
-        console.log("lose message should have shown");
-        // alert("You lost :( \nThe word was: " + word);
-        alert("You Lost! :( \nThe word was: " + word + "\n\nclick ok to start a new game");
-        newGame();
-        console.log("made it to lose condition and reset - did it work?");
     }
     // if remG is not yet equal to 0, the user has not yet lost (nothing happens until they press another key)
 }
@@ -122,15 +112,11 @@ function guessCheck() {
         }
         document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
         console.log("progress: " + uArr);
-        // check if win conditions are met
+
         winCheck();
     } else  {
         remG--;
         document.querySelector("#remg").innerHTML = "Guesses Remaining: " + remG;
-        // code to add body part to visuals goes here
-        // 
-        // 
-        // 
 
         loseCheck();
     }
@@ -143,8 +129,8 @@ function checkRepeat() {
     if (guesses.indexOf(userGuess) > -1) {
         alert("You already guessed " + userGuess + "!");
     } else {
-        guesses.push(userGuess);
-        document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses;
+        guesses.push(userGuess.toUpperCase());
+        document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses.join(" ");
 
         guessCheck();
     }
@@ -162,4 +148,3 @@ document.onkeyup = function(event) {
     // make sure the userGuess is not a repeat of a previous guess
     checkRepeat();
     }
-
