@@ -84,7 +84,9 @@ function winCheck() {
         wins++;
         document.querySelector("#wins").innerHTML = "Wins: " + wins;
         document.querySelector("#winLoseMessage").innerHTML = "YOU WIN!";
-        alert("You Won! The word was: " + word);
+        console.log("win message should have shown");
+        // alert("You Won! The word was: " + word);
+        alert("You Won! \nThe word was: " + word + "\n\nclick ok to start a new game");
         newGame();
         console.log("made it to win condition and reset - did it work?");
     }
@@ -94,8 +96,10 @@ function winCheck() {
 function loseCheck() {
     console.log("made it to loseCheck function");
     if (remG == 0) {
-        document.querySelector("#winLoseMessage").innerHTML = "YOU LOSE! :(";
-        alert("You lost :( \nThe word was: " + word);
+        document.querySelector("#winLoseMessage").innerHTML = "YOU LOSE! :(\nThe word was: " + word;
+        console.log("lose message should have shown");
+        // alert("You lost :( \nThe word was: " + word);
+        alert("You Lost! :( \nThe word was: " + word + "\n\nclick ok to start a new game");
         newGame();
         console.log("made it to lose condition and reset - did it work?");
     }
