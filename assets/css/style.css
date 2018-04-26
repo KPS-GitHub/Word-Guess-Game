@@ -1,0 +1,22 @@
+body {
+    background-image: url(../images/extremebackground.png);
+    background-size: 150vw 100vh;
+    background-position-x: right;
+}
+
+#uarr {
+    text-align: left;
+    margin-left: 0;
+}
+
+.container {
+    margin-top: 12em;
+}
+
+.center {
+    text-align: center;
+}
+
+.instructions {
+    font-size: 1em;
+}

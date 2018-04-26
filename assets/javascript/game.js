@@ -73,7 +73,6 @@ function winCheck() {
         wins++;
         document.querySelector("#wins").innerHTML = "Wins: " + wins;
         alert("You Won! The word was: " + word);
-        alert("Press ok to start a new game");
         newGame();
         console.log("made it to win condition and reset - did it work?");
     }
@@ -97,7 +96,11 @@ function guessCheck() {
     // if userGuess is correct
     if (wordArr.indexOf(userGuess) > -1) {
         // replace corresponding underscores in uArr with userGuess
-        uArr[wordArr.indexOf(userGuess)] = userGuess;
+        for (var i=0; i<wordArr.length; i++) {
+            if (userGuess == wordArr[i]) {
+                uArr[i] = userGuess;
+            }
+        }
         document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
         console.log("progress: " + uArr);
         // check if win conditions are met
