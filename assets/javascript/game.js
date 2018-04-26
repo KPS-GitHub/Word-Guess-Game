@@ -33,8 +33,18 @@ var wins = 0;
 
 
 // FUNCTIONS
+// 
+// 
+// IMPORTANT: fix bug where final letter upon victory
+//  and 0 for Guesses Remaining upon loss do not render
+// 
+// 
+// 
+// 
+// 
+// 
 
-// newGame - attach to a New Game button to start a new game
+// newGame - starts a new game
 function newGame() {
 
     // reset values
@@ -56,12 +66,13 @@ function newGame() {
     }
     console.log("uArr: " + uArr);
     
-    // write to html to display wins, uArr, fresh noose, etc.
+    // write to html to display wins, uArr, etc.
     document.querySelector("#wins").innerHTML = "Wins: " + wins;
     document.querySelector("#uarr").innerHTML = "Word: " + uArr.join(" ");
     document.querySelector("#guesses").innerHTML = "Guessed Letters: " + guesses;
     document.querySelector("#remg").innerHTML = "Guesses Remaining: " + remG;
-    // noose html - make once game works
+    document.querySelector("#winLoseMessage").innerHTML = "";
+    
 
 }
 
@@ -72,6 +83,7 @@ function winCheck() {
     if (uArr.indexOf("_") == -1) {
         wins++;
         document.querySelector("#wins").innerHTML = "Wins: " + wins;
+        document.querySelector("#winLoseMessage").innerHTML = "YOU WIN!";
         alert("You Won! The word was: " + word);
         newGame();
         console.log("made it to win condition and reset - did it work?");
@@ -82,6 +94,7 @@ function winCheck() {
 function loseCheck() {
     console.log("made it to loseCheck function");
     if (remG == 0) {
+        document.querySelector("#winLoseMessage").innerHTML = "YOU LOSE! :(";
         alert("You lost :( \nThe word was: " + word);
         newGame();
         console.log("made it to lose condition and reset - did it work?");

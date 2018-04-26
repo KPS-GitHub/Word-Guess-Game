@@ -4,9 +4,10 @@ body {
     background-position-x: right;
 }
 
-#uarr {
-    text-align: left;
-    margin-left: 0;
+.word {
+    font-size: 12em;
+    margin-top: .7em;
+    text-align: center;
 }
 
 .container {
@@ -20,3 +21,5 @@ body {
 .instructions {
     font-size: 1em;
 }
+
+/* MEDIA QUERIES */
